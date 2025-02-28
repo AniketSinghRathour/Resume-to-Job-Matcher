@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Update package list
+# Ensure system is up to date
 apt update && apt install -y curl python3.10 python3.10-venv python3.10-dev
 
 # Install Rust (Required for Tokenizers)
@@ -16,8 +16,8 @@ update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
 # Upgrade pip & setuptools
 python3 -m pip install --upgrade pip setuptools wheel
 
-# Install CPU-optimized PyTorch (Reduces Install Time)
-pip install --no-cache-dir torch==2.0.1+cpu torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+# Ensure PyTorch is Installed
+pip install torch==2.0.1 --index-url https://download.pytorch.org/whl/cpu
 
 # Ensure SpaCy Model is Installed Only Once
 if [ ! -d "/home/adminuser/.cache/spacy" ]; then
