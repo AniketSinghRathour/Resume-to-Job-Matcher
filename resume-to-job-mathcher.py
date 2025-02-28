@@ -12,12 +12,15 @@ import re
 import io
 
 # Ensure the spaCy model is installed
+import spacy.cli
 MODEL_NAME = "en_core_web_sm"
+
 try:
     nlp = spacy.load(MODEL_NAME)
 except OSError:
-    os.system(f"python -m spacy download {MODEL_NAME}")
+    spacy.cli.download(MODEL_NAME)  # Ensures model is downloaded before use
     nlp = spacy.load(MODEL_NAME)
+
 
 # Ensure necessary NLTK data is available
 nltk_data_files = ["punkt", "stopwords"]
