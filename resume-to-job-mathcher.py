@@ -9,7 +9,7 @@ from transformers import AutoTokenizer, AutoModelForTokenClassification, pipelin
 import fitz  # PyMuPDF for PDF processing
 from docx import Document
 import re
-import ioimport os
+import io
 import spacy
 import nltk
 import streamlit as st
