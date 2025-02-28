@@ -12,4 +12,4 @@ huggingface_hub==0.16.4
 setuptools==68.2.2
 pip==23.2.1
 numpy==1.23.5
-torch==2.0.1
+torch==2.0.1+cpu
