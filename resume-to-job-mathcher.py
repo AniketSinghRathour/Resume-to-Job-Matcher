@@ -10,12 +10,13 @@ import fitz  # PyMuPDF for PDF processing
 from docx import Document
 import re
 
-# Ensure the spaCy model is installed
+# Ensure spaCy model is installed
 MODEL_NAME = "en_core_web_sm"
 try:
     nlp = spacy.load(MODEL_NAME)
 except OSError:
-    spacy.cli.download(MODEL_NAME)  # Ensures model is downloaded before use
+    st.warning(f"Downloading {MODEL_NAME} model...")
+    os.system(f"python -m spacy download {MODEL_NAME}")
     nlp = spacy.load(MODEL_NAME)
 
 # Download necessary NLTK data
@@ -25,14 +26,14 @@ nltk.download("stopwords")
 # Load Sentence Transformer model for embeddings
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
-# Load Hugging Face's JobBERT model for NER
+# Load Hugging Face's JobBERT model for Named Entity Recognition (NER)
 jobbert_model_name = "dbmdz/bert-large-cased-finetuned-conll03-english"
 tokenizer = AutoTokenizer.from_pretrained(jobbert_model_name)
 jobbert_model = AutoModelForTokenClassification.from_pretrained(jobbert_model_name)
 jobbert_pipeline = pipeline("ner", model=jobbert_model, tokenizer=tokenizer)
 
-# Predefined skills list
-PREDEFINED_SKILLS = {
+# Predefined Skills List
+PREDEFINED_SKILLS = set([
     "Python", "Java", "C++", "JavaScript", "SQL", "Machine Learning", "Deep Learning",
     "Artificial Intelligence", "Data Science", "NLP", "TensorFlow", "PyTorch", "Keras",
     "Flask", "Django", "FastAPI", "React", "Angular", "Vue.js", "Node.js",
@@ -41,25 +42,25 @@ PREDEFINED_SKILLS = {
     "Agile", "Scrum", "JIRA", "Power BI", "Tableau", "Software Testing",
     "Android Development", "iOS Development", "React Native", "Flutter",
     "Natural Language Processing", "Computer Vision", "MLOps", "ETL", "Data Engineering"
-}
+])
 
-# Extract text from files
+# Extract text from files (PDF, DOCX, TXT)
 def extract_text(file):
     ext = os.path.splitext(file.name)[-1].lower()
     text = ""
-
+    
     if ext == ".pdf":
         doc = fitz.open(stream=file.read(), filetype="pdf")
         for page in doc:
             text += page.get_text("text")
-
+    
     elif ext == ".docx":
         doc = Document(file)
         text = "\n".join([para.text for para in doc.paragraphs])
-
+    
     elif ext == ".txt":
         text = file.read().decode("utf-8")
-
+    
     return text.strip()
 
 # Preprocess text
