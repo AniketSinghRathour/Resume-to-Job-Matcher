@@ -1,0 +1,14 @@
+streamlit
+spacy
+nltk
+scikit-learn
+sentence-transformers
+transformers
+pymupdf==1.21.0
+python-docx
+regex
+huggingface-hub
+torch
+torchvision
+torchaudio
+
