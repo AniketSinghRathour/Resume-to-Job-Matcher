@@ -20,8 +20,8 @@ except OSError:
     nlp = spacy.load(MODEL_NAME)
 
 # Download necessary NLTK data
-nltk.download("punkt")
-nltk.download("stopwords")
+nltk.download("punkt", quiet=True)
+nltk.download("stopwords", quiet=True)
 
 # Load Sentence Transformer model for embeddings
 model = SentenceTransformer("all-MiniLM-L6-v2")
@@ -33,7 +33,7 @@ jobbert_model = AutoModelForTokenClassification.from_pretrained(jobbert_model_na
 jobbert_pipeline = pipeline("ner", model=jobbert_model, tokenizer=tokenizer)
 
 # Predefined Skills List
-PREDEFINED_SKILLS = set([
+PREDEFINED_SKILLS = {
     "Python", "Java", "C++", "JavaScript", "SQL", "Machine Learning", "Deep Learning",
     "Artificial Intelligence", "Data Science", "NLP", "TensorFlow", "PyTorch", "Keras",
     "Flask", "Django", "FastAPI", "React", "Angular", "Vue.js", "Node.js",
@@ -42,7 +42,7 @@ PREDEFINED_SKILLS = set([
     "Agile", "Scrum", "JIRA", "Power BI", "Tableau", "Software Testing",
     "Android Development", "iOS Development", "React Native", "Flutter",
     "Natural Language Processing", "Computer Vision", "MLOps", "ETL", "Data Engineering"
-])
+}
 
 # Extract text from files (PDF, DOCX, TXT)
 def extract_text(file):
