@@ -1,6 +1,6 @@
 streamlit
-spacy==3.5.3
-thinc==8.1.10
+spacy==3.4.4
+thinc==8.1.0
 nltk
 sentence-transformers
 transformers==4.30.2
@@ -8,3 +8,5 @@ scikit-learn
 pymupdf
 python-docx
 spacy[transformers]
+setuptools==68.2.2
+pip==23.2.1
