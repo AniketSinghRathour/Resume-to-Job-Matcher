@@ -10,6 +10,18 @@ import fitz  # PyMuPDF for PDF processing
 from docx import Document
 import re
 
+import spacy
+import os
+
+# Ensure the model is installed
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    print("Downloading en_core_web_sm...")
+    os.system("python -m spacy download en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
+
+
 # Download necessary NLTK data
 nltk.download("punkt")
 nltk.download("stopwords")
