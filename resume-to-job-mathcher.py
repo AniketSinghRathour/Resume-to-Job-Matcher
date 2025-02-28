@@ -10,6 +10,15 @@ import fitz  # PyMuPDF for PDF processing
 from docx import Document
 import re
 
+
+# -----------
+# Run setup.sh when app starts
+st.info("Running setup script...")
+os.system("bash setup.sh")
+st.success("Setup script executed successfully!")
+# -------------
+
+
 # Ensure spaCy model is installed
 MODEL_NAME = "en_core_web_sm"
 try:
