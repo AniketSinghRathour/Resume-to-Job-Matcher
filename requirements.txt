@@ -4,12 +4,13 @@ nltk
 scikit-learn
 sentence-transformers
 transformers
-pymupdf
-fitz
+pymupdf  # Latest version to avoid frontend module error
 python-docx
 regex
 huggingface-hub
 torch
 torchvision
 torchaudio
+asyncio  # Fix event loop issue
+
 
